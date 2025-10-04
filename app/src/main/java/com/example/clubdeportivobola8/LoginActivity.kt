@@ -4,11 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import android.content.Intent
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login) //muestra pantalla inicial al abrir la app
+        setContentView(R.layout.activity_login) //muestra pantalla inicial al abrir la app
         configurarPantallaInicial()
     }
 
@@ -20,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Configurar btns de los forms Iniciar Sesion y Registrarse
         btnLogin.setOnClickListener {
-            setContentView(R.layout.activity_login_form) // Cambia a formulario login
+            setContentView(R.layout.iniciar_sesion_form) // Cambia a formulario login
             configurarFormularioLogin()
         }
 
@@ -29,26 +30,27 @@ class LoginActivity : AppCompatActivity() {
             configurarFormularioRegistro()
         }
     }
-
             //Botones de los forms para atras y cancelar (vuelven a pantalla login inicial)
     private fun configurarFormularioLogin() {
         val btnBack = findViewById<ImageButton>(R.id.btnBackLogin)
         btnBack.setOnClickListener {
-            setContentView(R.layout.login)
+            setContentView(R.layout.activity_login)
             configurarPantallaInicial()
         }
-    }
 
+                val btnIngresar = findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btnIngresar)
+                btnIngresar.setOnClickListener {
+                    val intent = Intent(this, MenuPrincipalActivity::class.java)
+                    startActivity(intent)
+                }
+    }
     private fun configurarFormularioRegistro() {
         val btnCancel = findViewById<TextView>(R.id.btnCancelRegister)
         btnCancel.setOnClickListener {
-            setContentView(R.layout.login)
+            setContentView(R.layout.activity_login)
             configurarPantallaInicial()
         }
     }
-
-
-
 }
 
 
