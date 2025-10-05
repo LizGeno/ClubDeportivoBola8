@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PagarCuotaActivity">
+
+    <!-- Incluimos el layout base para tener la misma apariencia con la Toolbar -->
+    <include
+        android:id="@+id/base_layout"
+        layout="@layout/layout_screen_base" />
+
+    <!-- Contenedor principal de la pantalla -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Pagar Cuota Mensual"
+            android:textColor="@color/text_on_card"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Campo para buscar socio por DNI -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldBuscarSocio"
+            style="@style/AppTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="DNI del Socio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo para seleccionar el mes (Spinner) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldMes"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Seleccionar Mes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFieldBuscarSocio">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteMes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón para confirmar el pago -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonConfirmarPago"
+            style="@style/AppButton"
+            android:layout_width="325dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:text="Confirmar Pago"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFieldMes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

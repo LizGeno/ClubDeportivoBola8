@@ -2,11 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#B2DCE8"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".MenuPrincipalActivity">
 
     <!-- Contenedor interno (bloque2) -->
     <LinearLayout
