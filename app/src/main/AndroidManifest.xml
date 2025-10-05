@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDeportivoBola8">
         <activity
+            android:name=".ListadoCuotasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InscripcionActividadActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -20,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MenuPrincipalActivity" />
     </application>
 

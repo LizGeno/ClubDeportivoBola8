@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">ClubDeportivoBola8</string>
+    <string name="pagar">Pagar</string>
+    <string name="inscripci_n_a_actividad">Inscripción a Actividad</string>
+    <string name="dni_o_email">DNI o Email</string>
+    <string name="apellido">Apellido</string>
+    <string name="nombre">Nombre</string>
+    <string name="listado_cuotas_titulo">Listado de Cuotas</string>
+    <string-array name="opciones_filtro_cuotas">
+        <item>Todas</item>
+        <item>Vencidas</item>
+        <item>Por vencer</item>
+    </string-array>
+
 </resources>
