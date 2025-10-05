@@ -1,133 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:background="#B2DCE8"
     android:padding="24dp"
-    android:id="@+id/main">
+    tools:context=".InscripcionActividadActivity">
 
-    <!-- Contenedor interno -->
+    <!-- Contenedor interno que agrupa todo el formulario -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/bloque2_background"
-        android:layout_gravity="center"
         android:padding="24dp">
 
-        <!-- Título -->
+        <!-- Título de la pantalla -->
         <TextView
+            android:id="@+id/tvTituloInscripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/inscripci_n_a_actividad"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="24dp"/>
+            android:text="@string/inscripci_n_a_actividad"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-        <!-- Espaciador superior -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3" />
-
-        <!-- Campo Nombre y Apellido -->
-        <EditText
+        <!-- Campo para Nombre y Apellido (Unificado) -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre y Apellido"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:layout_marginBottom="12dp"
-            android:padding="12dp"/>
+            android:layout_marginTop="24dp"
+            android:hint="Nombre y Apellido">
 
-        <!-- Campo DNI -->
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombreApellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo para DNI (Nuevo) -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="DNI"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:inputType="number"
-            android:layout_marginBottom="12dp"
-            android:padding="12dp"/>
+            android:layout_marginTop="16dp"
+            android:hint="DNI">
 
-        <!-- Campo Email -->
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo para Teléfono (Nuevo) -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="12dp"
-            android:padding="12dp"/>
+            android:layout_marginTop="16dp"
+            android:hint="Teléfono">
 
-        <!-- Campo Teléfono -->
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo para Email (Nuevo) -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Teléfono (opcional)"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:inputType="phone"
-            android:layout_marginBottom="12dp"
-            android:padding="12dp"/>
-        <!-- Spinner de actividades -->
+            android:layout_marginTop="16dp"
+            android:hint="Email">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Selector de Actividad (Spinner) -->
         <Spinner
-            android:id="@+id/spActividad"
+            android:id="@+id/spinnerActividades"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/bg_spinner"
-            android:minHeight="48dp"
-            android:padding="12dp" />
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
 
-
-        <!-- Botón Pagar -->
+        <!-- Botón de Pagar -->
         <Button
             android:id="@+id/btnPagar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pagar"
+            android:layout_marginTop="24dp"
+            android:padding="12dp"
+            android:text="@string/pagar" />
 
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:backgroundTint="#2196F3"
-            android:textColor="@android:color/white"
-            android:padding="14dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_boton"/>
+        <!-- Botón para Volver al Menú -->
         <Button
             android:id="@+id/btnVolverMenu"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Volver al Menú Principal"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
-
-
-        <!-- Espaciador inferior -->
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3" />
+            android:layout_gravity="center_horizontal"
+            android:text="VOLVER AL MENÚ" />
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

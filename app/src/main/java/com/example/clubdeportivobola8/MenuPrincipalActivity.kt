@@ -20,9 +20,12 @@ class MenuPrincipalActivity : AppCompatActivity() {
         // 🔹 Botón Actividades No Socios
         val btnActividadesNoSocios = findViewById<Button>(R.id.btnActividadesNoSocios)
         btnActividadesNoSocios.setOnClickListener {
+            // Crea una "intención" para abrir la nueva actividad
             val intent = Intent(this, InscripcionActividadActivity::class.java)
+            // Ejecuta la intención, abriendo la pantalla
             startActivity(intent)
         }
+
 
         // 🔹 Botón Lista de Cuotas
         val btnListaCuotas = findViewById<Button>(R.id.btnListaCuotas)
