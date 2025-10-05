@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B2DCE8"
+    android:padding="24dp"
+    android:id="@+id/main">
+
+    <!-- Contenedor interno -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/bloque2_background"
+        android:layout_gravity="center"
+        android:padding="24dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inscripci_n_a_actividad"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Espaciador superior -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
+
+        <!-- Campo Nombre y Apellido -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre y Apellido"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="12dp"
+            android:padding="12dp"/>
+
+        <!-- Campo DNI -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DNI"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:inputType="number"
+            android:layout_marginBottom="12dp"
+            android:padding="12dp"/>
+
+        <!-- Campo Email -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="12dp"
+            android:padding="12dp"/>
+
+        <!-- Campo Teléfono -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teléfono (opcional)"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:inputType="phone"
+            android:layout_marginBottom="12dp"
+            android:padding="12dp"/>
+        <!-- Spinner de actividades -->
+
+
+        <Spinner
+            android:id="@+id/spActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_spinner"
+            android:minHeight="48dp"
+            android:padding="12dp" />
+
+
+        <!-- Botón Pagar -->
+        <Button
+            android:id="@+id/btnPagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pagar"
+
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:backgroundTint="#2196F3"
+            android:textColor="@android:color/white"
+            android:padding="14dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_boton"/>
+        <Button
+            android:id="@+id/btnVolverMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Volver al Menú Principal"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+
+        <!-- Espaciador inferior -->
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
+
+    </LinearLayout>
+
+</ScrollView>
