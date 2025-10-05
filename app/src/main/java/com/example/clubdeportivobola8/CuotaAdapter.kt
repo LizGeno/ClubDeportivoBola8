@@ -6,8 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CuotaAdapter(private val listaCuotas: List<Cuota>) :
-    RecyclerView.Adapter<CuotaAdapter.CuotaViewHolder>() {
+class CuotaAdapter(private var listaCuotas: List<Cuota>) :
+    RecyclerView.Adapter<CuotaAdapter.CuotaViewHolder>()
+{// Dentro de la clase CuotaAdapter
+
+    fun actualizarLista(nuevaLista: List<Cuota>) {
+        listaCuotas = nuevaLista
+        notifyDataSetChanged() // Este comando le dice al RecyclerView: "¡Hey, la lista cambió, redibújate!"
+    }
+
 
     inner class CuotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvSocio: TextView = itemView.findViewById(R.id.tvSocioNombre)
