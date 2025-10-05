@@ -32,6 +32,23 @@ class MenuPrincipalActivity : AppCompatActivity() {
             val intent = Intent(this, PagarCuotaActivity::class.java)
             startActivity(intent)
         }
+
+        // 🔹 Botón Actividades No Socios
+        val btnActividadesNoSocios = findViewById<AppCompatButton>(R.id.btnActividadesNoSocios)
+        btnActividadesNoSocios.setOnClickListener {
+            // Crea una "intención" para abrir la nueva actividad
+            val intent = Intent(this, InscripcionActividadActivity::class.java)
+            // Ejecuta la intención, abriendo la pantalla
+            startActivity(intent)
+        }
+
+
+        // 🔹 Botón Lista de Cuotas
+        val btnListaCuotas = findViewById<AppCompatButton>(R.id.btnListaCuotas)
+        btnListaCuotas.setOnClickListener {
+            val intent = Intent(this, ListadoCuotasActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
