@@ -30,6 +30,11 @@ class MenuPrincipalActivity : AppCompatActivity() {
             // 4. Iniciar la nueva actividad
             startActivity(intent)
         }
+        val btnPagarCuota = findViewById<AppCompatButton>(R.id.btnPagarCuota)
+        btnPagarCuota.setOnClickListener {
+            val intent = Intent(this, PagarCuotaActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // La función navigateTo para Fragments no es necesaria en esta Activity,

@@ -25,6 +25,10 @@
         <activity
             android:name=".AltaSocioActivity"
             android:exported="false" />
+        <activity
+            android:name=".PagarCuotaActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
