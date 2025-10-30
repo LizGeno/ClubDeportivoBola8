@@ -28,6 +28,12 @@
         <activity
             android:name=".PagarCuotaActivity"
             android:exported="false" />
+        <activity
+            android:name=".ListadoSociosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListadoCuotasActivity"
+            android:exported="false" />
 
     </application>
 
