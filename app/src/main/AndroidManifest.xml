@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MenuPrincipalActivity" />
+        <activity android:name=".MenuPrincipalActivity"
+            android:exported="false" />
         <activity
             android:name=".AltaSocioActivity"
             android:exported="false" />

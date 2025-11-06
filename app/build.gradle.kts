@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.protolite.well.known.types)
     val lifecycle_version = "2.9.4"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

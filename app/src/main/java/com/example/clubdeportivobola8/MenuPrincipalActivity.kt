@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.widget.AppCompatButton
+import com.example.clubdeportivobola8.ListadoSociosActivity
+
 // No necesitas importar androidx.fragment.app.Fragment aquí
 
 class MenuPrincipalActivity : AppCompatActivity() {

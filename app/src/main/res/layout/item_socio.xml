@@ -29,6 +29,33 @@
         android:text="email@example.com"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"/>
+    <LinearLayout
+        android:id="@+id/actions_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/btnEditar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Editar Socio"
+            android:src="@android:drawable/ic_menu_edit" />
+
+
+        <ImageButton
+            android:id="@+id/btnEliminar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Eliminar Socio"
+            android:src="@android:drawable/ic_menu_delete" />
+
+    </LinearLayout>
 
 </LinearLayout>
     
