@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.widget.AppCompatButton
-import com.example.clubdeportivobola8.ListadoSociosActivity
-
-// No necesitas importar androidx.fragment.app.Fragment aquí
 
 class MenuPrincipalActivity : AppCompatActivity() {
 
@@ -38,6 +35,12 @@ class MenuPrincipalActivity : AppCompatActivity() {
         val btnListaSocios = findViewById<AppCompatButton>(R.id.btnListaSocios)
         btnListaSocios.setOnClickListener {
             val intent = Intent(this, ListadoSociosActivity::class.java)
+            startActivity(intent)
+        }
+
+        val btnActividadesNoSocios = findViewById<AppCompatButton>(R.id.btnActividadesNoSocios)
+        btnActividadesNoSocios.setOnClickListener {
+            val intent = Intent(this, InscripcionActividadActivity::class.java)
             startActivity(intent)
         }
 

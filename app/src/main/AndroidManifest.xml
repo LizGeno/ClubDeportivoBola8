@@ -35,6 +35,9 @@
         <activity
             android:name=".ListadoCuotasActivity"
             android:exported="false" />
+        <activity
+            android:name=".InscripcionActividadActivity"
+            android:exported="false" />
 
     </application>
 
