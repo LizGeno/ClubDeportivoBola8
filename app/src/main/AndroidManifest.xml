@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MenuPrincipalActivity" />
+        <activity android:name=".MenuPrincipalActivity"
+            android:exported="false" />
         <activity
             android:name=".AltaSocioActivity"
             android:exported="false" />
@@ -29,11 +30,13 @@
             android:name=".PagarCuotaActivity"
             android:exported="false" />
         <activity
-            android:name=".InscripcionActividadActivity"
+            android:name=".ListadoSociosActivity"
             android:exported="false" />
-
         <activity
             android:name=".ListadoCuotasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InscripcionActividadActivity"
             android:exported="false" />
 
     </application>

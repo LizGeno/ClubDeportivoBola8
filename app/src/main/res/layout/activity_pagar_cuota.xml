@@ -14,7 +14,7 @@
     <!-- Contenedor principal de la pantalla -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="573dp"
         android:layout_gravity="center"
         android:padding="24dp">
 
@@ -70,6 +70,45 @@
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldMonto"
+            style="@style/AppTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Monto a Pagar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFieldMes">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputMonto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldFecha"
+            style="@style/AppTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Fecha de Pago"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFieldMonto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <!-- Botón para confirmar el pago -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonConfirmarPago"
@@ -80,7 +119,7 @@
             android:text="Confirmar Pago"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textFieldMes" />
+            app:layout_constraintTop_toBottomOf="@id/textFieldFecha" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
