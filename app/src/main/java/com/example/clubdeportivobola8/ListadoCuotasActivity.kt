@@ -26,10 +26,9 @@ class ListadoCuotasActivity : AppCompatActivity() {
     private val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     private val fechaHoy = formatoFecha.format(Date())
 
-    // 🔥 CAMBIO: Lista de cuotas con ejemplos para el día de hoy.
     private var listaCompletaDeCuotas = listOf(
-        Cuota("Socio Con Vencimiento Hoy", "Tenis", fechaHoy, "Por vencer"),
-        Cuota("Otro Socio Que Vence Hoy", "Natación", fechaHoy, "Por vencer"),
+        Cuota("Mariano Paez", "Tenis", fechaHoy, "Por vencer"),
+        Cuota("Lucia Benitez", "Natación", fechaHoy, "Por vencer"),
         Cuota("Juan Pérez", "Fútbol", "10/10/2025", "Vencida"),
         Cuota("María López", "Tenis", "15/10/2025", "Por vencer"),
         Cuota("Carlos Gómez", "Natación", "25/09/2025", "Vencida"),
