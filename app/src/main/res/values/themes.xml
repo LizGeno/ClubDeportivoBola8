@@ -6,4 +6,23 @@
     </style>
 
     <style name="Theme.ClubDeportivoBola8" parent="Base.Theme.ClubDeportivoBola8" />
+    <!-- Estilo para los campos de texto -->
+    <style name="AppTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="hintTextColor">@color/hint_text_color</item>
+    </style>
+
+    <!-- Estilo para los botones principales -->
+    <style name="AppButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/card_background</item>
+        <item name="cornerRadius">24dp</item> <!-- Ajusta el radio según tu diseño -->
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAllCaps">false</item> <!-- Para que no convierta a mayúsculas -->
+    </style>
 </resources>
