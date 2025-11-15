@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.clubdeportivobola8.data.model.Socio
 import java.util.Date
-class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context, "ClubDeportBola8.db", null, 2) {
+class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context, "ClubDeportBola8.db", null, 3) {
     companion object {
         @Volatile
         private var INSTANCE: DBHelper? = null
@@ -35,17 +35,28 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
                 "nombre TEXT NOT NULL, " +
                 "descripcion TEXT NOT NULL, " +
                 "precio REAL NOT NULL)"
+
+        private const val SQL_CREATE_TABLE_PAGOS_CUOTAS = "CREATE TABLE pagos_cuotas (" +
+                "id_pago INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "id_socio INTEGER NOT NULL, " +
+                "fecha_pago INTEGER NOT NULL, " +
+                "mes_pagado TEXT NOT NULL, " +
+                "monto REAL NOT NULL, " +
+                "FOREIGN KEY(id_socio) REFERENCES socios(id))"
     }
     override fun onCreate(db: SQLiteDatabase) {
         //Tablas pasra Registro de los socios y de los no socios.
         db.execSQL( SQL_CREATE_TABLE_SOCIOS)
         //db.execSQL( SQL_CREATE_TABLE_NO_SOCIOS)
         db.execSQL( SQL_CREATE_TABLE_ACTIVIDADES)
+        //tabla pago_cuotas
+        db.execSQL(SQL_CREATE_TABLE_PAGOS_CUOTAS)
     }
 
     override fun onUpgrade( db: SQLiteDatabase,  oldVersion: Int,  newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS socios")
         db.execSQL("DROP TABLE IF EXISTS actividades")
+        db.execSQL("DROP TABLE IF EXISTS pagos_cuotas")
         onCreate(db)
     }
 
@@ -130,5 +141,56 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
             }
         }
         return socio
+    }
+
+    fun getSocioByDni(dni: String): Socio? {
+        val db = this.readableDatabase
+        var socio: Socio? = null
+        val cursor = db.query(
+            "socios",
+            null,
+            "dni = ?",
+            arrayOf(dni),
+            null,
+            null,
+            null
+        )
+
+        cursor.use { c ->
+            if (c.moveToFirst()) {
+                socio = Socio(
+                    id = c.getInt(c.getColumnIndexOrThrow("id")),
+                    nombre = c.getString(c.getColumnIndexOrThrow("nombre")),
+                    apellido = c.getString(c.getColumnIndexOrThrow("apellido")),
+                    dni = c.getString(c.getColumnIndexOrThrow("dni")),
+                    fechaNacimiento = Date(c.getLong(c.getColumnIndexOrThrow("fecha_nacimiento"))),
+                    email = c.getString(c.getColumnIndexOrThrow("email"))
+                )
+            }
+        }
+        return socio
+    }
+
+    fun insertarPago(
+        dniSocio: String,
+        fechaPago: Date,
+        mesPagado: String,
+        monto: Double
+    ): Boolean {
+
+        val socioEncontrado = getSocioByDni(dniSocio)
+        if (socioEncontrado == null) {
+            return false // DNI no encontrado, no se puede registrar el pago
+        }
+        val idSocio = socioEncontrado.id
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("id_socio", idSocio)
+            put("fecha_pago", fechaPago.time)
+            put("mes_pagado", mesPagado)
+            put("monto", monto)
+        }
+        val newRowId = db.insert("pagos_cuotas", null, values)
+        return newRowId != -1L
     }
 }
