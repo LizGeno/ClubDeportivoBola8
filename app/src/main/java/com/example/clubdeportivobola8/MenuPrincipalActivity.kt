@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.widget.AppCompatButton
-// No necesitas importar androidx.fragment.app.Fragment aquí
 
 class MenuPrincipalActivity : AppCompatActivity() {
 
@@ -33,22 +32,24 @@ class MenuPrincipalActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 🔹 Botón Actividades No Socios
-        val btnActividadesNoSocios = findViewById<AppCompatButton>(R.id.btnActividadesNoSocios)
-        btnActividadesNoSocios.setOnClickListener {
-            // Crea una "intención" para abrir la nueva actividad
-            val intent = Intent(this, InscripcionActividadActivity::class.java)
-            // Ejecuta la intención, abriendo la pantalla
+        val btnListaSocios = findViewById<AppCompatButton>(R.id.btnListaSocios)
+        btnListaSocios.setOnClickListener {
+            val intent = Intent(this, ListadoSociosActivity::class.java)
             startActivity(intent)
         }
 
+        val btnActividadesNoSocios = findViewById<AppCompatButton>(R.id.btnActividadesNoSocios)
+        btnActividadesNoSocios.setOnClickListener {
+            val intent = Intent(this, InscripcionActividadActivity::class.java)
+            startActivity(intent)
+        }
 
-        // 🔹 Botón Lista de Cuotas
         val btnListaCuotas = findViewById<AppCompatButton>(R.id.btnListaCuotas)
         btnListaCuotas.setOnClickListener {
             val intent = Intent(this, ListadoCuotasActivity::class.java)
             startActivity(intent)
         }
+
     }
 
 }
