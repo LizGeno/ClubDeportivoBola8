@@ -1,6 +1,5 @@
 package com.example.clubdeportivobola8
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -8,93 +7,120 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ListadoCuotasActivity : AppCompatActivity() {
 
-    // --- Declarar variables ---
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CuotaAdapter
     private lateinit var spinnerFiltro: Spinner
-
-    // 🔥 CAMBIO 1: Lista maestra de cuotas. Esta lista contiene TODAS las cuotas.
-    private var listaCompletaDeCuotas = listOf(
-        Cuota("Juan Pérez", "Fútbol", "10/10/2025", "Vencida"),
-        Cuota("María López", "Tenis", "15/10/2025", "Por vencer"),
-        Cuota("Carlos Gómez", "Natación", "25/09/2025", "Vencida"),
-        Cuota("Ana Torres", "Básquet", "01/11/2025", "Por vencer"),
-        Cuota("Luis Martín", "Fútbol", "05/10/2025", "Pagada") // Agregué una pagada para el ejemplo
-    )
+    private lateinit var btnVencimientosHoy: Button
+    private lateinit var cuotaDao: CuotaDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Nota: He quitado el "enableEdgeToEdge" y su listener para simplificar.
-        // Si lo necesitas, puedes volver a añadirlo sin problema.
         setContentView(R.layout.activity_listado_cuotas)
+
+        // --- Inicializar la base de datos ---
+        cuotaDao = AppDatabase.getDatabase(this).cuotaDao()
 
         // --- Vincular vistas ---
         recyclerView = findViewById(R.id.rvListadoCuotas)
         spinnerFiltro = findViewById(R.id.spFiltroCuotas)
+        btnVencimientosHoy = findViewById(R.id.btnVencimientosHoy)
         val btnVolverMenu: Button = findViewById(R.id.btnVolverMenu)
 
         // --- Configurar RecyclerView ---
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // 🔥 CAMBIO 2: Inicialmente, el adaptador se crea con la lista completa.
-        adapter = CuotaAdapter(listaCompletaDeCuotas)
+        // El adaptador se inicializa vacío. Se llenará cuando los datos se carguen de la BD.
+        adapter = CuotaAdapter(emptyList())
         recyclerView.adapter = adapter
 
-        // --- Configurar el Spinner y su lógica ---
+        // --- Lógica de la UI ---
         setupSpinner()
+        btnVencimientosHoy.setOnClickListener { filtrarPorVencimientosDeHoy() }
+        btnVolverMenu.setOnClickListener { finish() }
 
-        // --- Lógica del botón para volver atrás ---
-        btnVolverMenu.setOnClickListener {
-            // Usamos finish() que es más eficiente para volver a la pantalla anterior.
-            finish()
+        // --- Cargar datos y popular la BD si es necesario ---
+        lifecycleScope.launch {
+            // Si la base de datos está vacía, inserta los datos de ejemplo.
+            if (cuotaDao.count() == 0) {
+                insertarDatosDeEjemplo()
+            }
+            // Carga y muestra todas las cuotas al iniciar.
+            cargarTodasLasCuotas()
         }
     }
 
-    // 🔥 CAMBIO 3: Nueva función para configurar el Spinner
     private fun setupSpinner() {
-        // Opciones que se mostrarán en el Spinner
         val opcionesFiltro = arrayOf("Mostrar Todas", "Vencida", "Pagada", "Por vencer")
-
-        // Crear un ArrayAdapter para el Spinner
         val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opcionesFiltro)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerFiltro.adapter = spinnerAdapter
 
-        // **¡AQUÍ ESTÁ LA MAGIA!**
-        // Este listener se ejecuta cada vez que el usuario selecciona un ítem.
         spinnerFiltro.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val opcionSeleccionada = parent?.getItemAtPosition(position).toString()
                 filtrarLista(opcionSeleccionada)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // No necesitamos hacer nada aquí
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    private fun filtrarLista(estado: String) {
+        lifecycleScope.launch {
+            if (estado == "Mostrar Todas") {
+                cargarTodasLasCuotas()
+            } else {
+                // Implementa la búsqueda por estado si es necesario
+                // Por ahora, recargamos todo para simplificar.
+                 cuotaDao.getAllCuotas().collect { lista ->
+                    adapter.actualizarLista(lista.filter { it.estado == estado })
+                }
             }
         }
     }
 
-    // 🔥 CAMBIO 4: Nueva función para filtrar la lista
-    private fun filtrarLista(estado: String) {
-        val listaFiltrada: List<Cuota>
+    private fun filtrarPorVencimientosDeHoy() {
+        lifecycleScope.launch {
+            val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val fechaHoy = formatoFecha.format(Date())
 
-        if (estado == "Mostrar Todas") {
-            listaFiltrada = listaCompletaDeCuotas
-        } else {
-            // Usamos la función filter de Kotlin para crear una nueva lista
-            // solo con las cuotas que coinciden con el estado seleccionado.
-            listaFiltrada = listaCompletaDeCuotas.filter { cuota ->
-                cuota.estado == estado
+            cuotaDao.getCuotasByFechaVencimiento(fechaHoy).collect { lista ->
+                adapter.actualizarLista(lista)
             }
         }
+    }
 
-        // Le decimos al adaptador que actualice su lista y notifique al RecyclerView.
-        adapter.actualizarLista(listaFiltrada)
+    private fun cargarTodasLasCuotas() {
+        lifecycleScope.launch {
+            cuotaDao.getAllCuotas().collect { lista ->
+                adapter.actualizarLista(lista)
+            }
+        }
+    }
+
+    private suspend fun insertarDatosDeEjemplo() {
+        val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val fechaHoy = formatoFecha.format(Date())
+
+        val cuotasDeEjemplo = listOf(
+            Cuota(nombreSocio = "Mariano Paez", actividad = "Tenis", fechaVencimiento = fechaHoy, estado = "Por vencer"),
+            Cuota(nombreSocio = "Lucia Benitez", actividad = "Natación", fechaVencimiento = fechaHoy, estado = "Por vencer"),
+            Cuota(nombreSocio = "Juan Pérez", actividad = "Fútbol", fechaVencimiento = "10/10/2025", estado = "Vencida"),
+            Cuota(nombreSocio = "María López", actividad = "Tenis", fechaVencimiento = "15/10/2025", estado = "Por vencer"),
+            Cuota(nombreSocio = "Carlos Gómez", actividad = "Natación", fechaVencimiento = "25/09/2025", estado = "Vencida"),
+            Cuota(nombreSocio = "Ana Torres", actividad = "Básquet", fechaVencimiento = "01/11/2025", estado = "Por vencer"),
+            Cuota(nombreSocio = "Luis Martín", actividad = "Fútbol", fechaVencimiento = "05/10/2025", estado = "Pagada")
+        )
+        cuotaDao.insertAll(*cuotasDeEjemplo.toTypedArray())
     }
 }
-

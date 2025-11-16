@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CuotaAdapter(private var listaCuotas: List<Cuota>) :
     RecyclerView.Adapter<CuotaAdapter.CuotaViewHolder>()
-{// Dentro de la clase CuotaAdapter
+{
 
     fun actualizarLista(nuevaLista: List<Cuota>) {
         listaCuotas = nuevaLista
-        notifyDataSetChanged() // Este comando le dice al RecyclerView: "¡Hey, la lista cambió, redibújate!"
+        notifyDataSetChanged()
     }
-
 
     inner class CuotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvSocio: TextView = itemView.findViewById(R.id.tvSocioNombre)
@@ -36,13 +35,14 @@ class CuotaAdapter(private var listaCuotas: List<Cuota>) :
         holder.tvVencimiento.text = "Vence: ${cuota.fechaVencimiento}"
         holder.tvEstado.text = "Estado: ${cuota.estado}"
 
-        // Cambiar color según estado
-        holder.tvEstado.setTextColor(
-            if (cuota.estado == "Vencida")
-                holder.itemView.resources.getColor(android.R.color.holo_red_dark)
-            else
-                holder.itemView.resources.getColor(android.R.color.holo_green_dark)
-        )
+        // --- Cambiar color según estado ---
+        val colorRes = when (cuota.estado) {
+            "Vencida" -> android.R.color.holo_red_dark
+            "Pagada" -> android.R.color.holo_green_dark
+            "Por vencer" -> android.R.color.holo_orange_dark
+            else -> android.R.color.black
+        }
+        holder.tvEstado.setTextColor(holder.itemView.resources.getColor(colorRes))
     }
 
     override fun getItemCount(): Int = listaCuotas.size

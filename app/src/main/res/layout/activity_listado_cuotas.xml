@@ -44,6 +44,14 @@
             android:padding="12dp"
             android:entries="@array/opciones_filtro_cuotas" />
 
+        <Button
+            android:id="@+id/btnVencimientosHoy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_boton"
+            android:text="Ver Vencimientos de Hoy" />
+
         <!-- Lista de cuotas -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvListadoCuotas"
