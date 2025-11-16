@@ -5,128 +5,147 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InscripcionActividadActivity">
+
     <include
         android:id="@+id/base_layout"
         layout="@layout/layout_screen_base" />
 
-    <!-- Contenedor interno que agrupa todo el formulario -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- ScrollView para permitir el desplazamiento del formulario -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="20dp">
-        <!-- Selector de Actividad (Spinner) -->
-        <Spinner
-            android:id="@+id/spinnerActividades"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="24dp">
+
+        <!-- Contenedor interno que agrupa todo el formulario -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
-        <!-- Título de la pantalla -->
-        <TextView
-            android:id="@+id/tvTituloInscripcion"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/inscripci_n_a_actividad"
-            android:textColor="@color/text_on_card"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:padding="20dp">
 
-        <!-- Campo para Nombre y Apellido (Unificado) -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:hint="Nombre y Apellido"
-            android:id="@+id/etNombreApellido"
-            style="@style/AppTextInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTituloInscripcion">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="325dp"
+            <!-- Título de la pantalla -->
+            <TextView
+                android:id="@+id/tvTituloInscripcion"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="32dp"
+                android:text="@string/inscripci_n_a_actividad"
+                android:textColor="@color/text_on_card"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Campo para DNI (Nuevo) -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:hint="DNI"
-            android:id="@+id/etDni"
-            style="@style/AppTextInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etNombreApellido">
+            <!-- Selector de Actividad (Spinner) -->
+            <Spinner
+                android:id="@+id/spinnerActividades"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTituloInscripcion" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="325dp"
+            <!-- Campo para Nombre y Apellido (Unificado) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etNombreApellido"
+                style="@style/AppTextInput"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="20dp"
+                android:hint="Nombre y Apellido"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerActividades">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo para Teléfono (Nuevo) -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:hint="Teléfono"
-            android:id="@+id/etTelefono"
-            style="@style/AppTextInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etDni">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="325dp"
+            <!-- Campo para DNI (Nuevo) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etDni"
+                style="@style/AppTextInput"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:inputType="phone"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="20dp"
+                android:hint="DNI"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etNombreApellido">
 
-        <!-- Campo para Email -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:hint="Email"
-            android:id="@+id/etEmail"
-            style="@style/AppTextInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etTelefono">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="325dp"
+            <!-- Campo para Teléfono (Nuevo) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etTelefono"
+                style="@style/AppTextInput"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:inputType="textEmailAddress"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="20dp"
+                android:hint="Teléfono"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etDni">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Botón de Pagar -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPagar"
-            style="@style/AppButton"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Pagar"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etEmail" />
+            <!-- Campo para Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etEmail"
+                style="@style/AppTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etTelefono">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón de Pagar -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPagar"
+                style="@style/AppButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Pagar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+            <!-- Botón para Volver -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVolver"
+                style="@style/Widget.MaterialComponents.Button.TextButton" 
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Volver al Menú"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPagar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 </FrameLayout>

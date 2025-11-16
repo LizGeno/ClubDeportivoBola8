@@ -1,16 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.clubdeportivobola8"
     compileSdk = 36
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
+
     defaultConfig {
         applicationId = "com.example.clubdeportivobola8"
         minSdk = 24
@@ -42,8 +39,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.protolite.well.known.types)
-    val lifecycle_version = "2.9.4"
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -54,12 +50,9 @@ dependencies {
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_version}")
-
 }
