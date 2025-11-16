@@ -37,7 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".InscripcionActividadActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuPrincipalActivity" />
 
     </application>
 

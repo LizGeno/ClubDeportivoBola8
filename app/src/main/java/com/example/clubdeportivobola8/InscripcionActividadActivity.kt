@@ -4,35 +4,34 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 
 class InscripcionActividadActivity : AppCompatActivity() {
 
-    // 1. Declara las vistas como propiedades de la clase
-    private lateinit var etNombreApellido: EditText
-    private lateinit var etDni: EditText
-    private lateinit var etTelefono: EditText
-    private lateinit var etEmail: EditText
+    private lateinit var tilNombreApellido: TextInputLayout
+    private lateinit var tilDni: TextInputLayout
+    private lateinit var tilTelefono: TextInputLayout
+    private lateinit var tilEmail: TextInputLayout
     private lateinit var spinnerActividades: Spinner
     private lateinit var btnPagar: Button
-    private lateinit var btnVolverMenu: Button
+    private lateinit var btnVolver: Button // Declaramos el nuevo botón
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inscripcion_actividad)
 
-        // 2. INICIALIZA las propiedades (sin 'val')
-        etNombreApellido = findViewById(R.id.etNombreApellido)
-        etDni = findViewById(R.id.etDni)
-        etTelefono = findViewById(R.id.etTelefono)
-        etEmail = findViewById(R.id.etEmail)
+        // --- Inicialización de vistas ---
+        tilNombreApellido = findViewById(R.id.etNombreApellido)
+        tilDni = findViewById(R.id.etDni)
+        tilTelefono = findViewById(R.id.etTelefono)
+        tilEmail = findViewById(R.id.etEmail)
         spinnerActividades = findViewById(R.id.spinnerActividades)
         btnPagar = findViewById(R.id.btnPagar)
-        btnVolverMenu = findViewById(R.id.btnVolverMenu)
+        btnVolver = findViewById(R.id.btnVolver) // Inicializamos el nuevo botón
 
         // --- Configuración del Spinner ---
         val actividades = arrayOf("Fútbol", "Tenis", "Natación", "Básquet")
@@ -47,20 +46,17 @@ class InscripcionActividadActivity : AppCompatActivity() {
             }
         }
 
-        // --- Lógica del botón "Volver al Menú" ---
-        btnVolverMenu.setOnClickListener {
-            finish()
+        // --- Lógica del nuevo botón "Volver" ---
+        btnVolver.setOnClickListener {
+            finish() // Cierra la actividad actual y vuelve a la anterior
         }
     }
 
-    /**
-     * Valida todos los campos del formulario usando las propiedades de la clase.
-     */
     private fun validarCampos(): Boolean {
-        val nombreApellidoText = etNombreApellido.text.toString().trim()
-        val dniText = etDni.text.toString().trim()
-        val telefonoText = etTelefono.text.toString().trim()
-        val emailText = etEmail.text.toString().trim()
+        val nombreApellidoText = tilNombreApellido.editText?.text.toString().trim()
+        val dniText = tilDni.editText?.text.toString().trim()
+        val telefonoText = tilTelefono.editText?.text.toString().trim()
+        val emailText = tilEmail.editText?.text.toString().trim()
 
         if (nombreApellidoText.isBlank()) {
             Toast.makeText(this, "El nombre y apellido no puede estar vacío", Toast.LENGTH_SHORT).show()
@@ -83,18 +79,15 @@ class InscripcionActividadActivity : AppCompatActivity() {
             return false
         }
 
-        return true // Todos los campos son válidos
+        return true
     }
 
-    /**
-     * Muestra un diálogo de alerta para confirmar el pago.
-     */
     private fun mostrarDialogoConfirmacion() {
         AlertDialog.Builder(this)
             .setTitle("Confirmación de Pago")
             .setMessage("Actividad abonada correctamente.")
             .setPositiveButton("Aceptar") { _, _ ->
-                finish() // Cierra la actividad y vuelve al menú
+                finish()
             }
             .setCancelable(false)
             .show()
